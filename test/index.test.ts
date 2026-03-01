@@ -83,6 +83,7 @@ describe('parsePath', () => {
         parser.addHandler('tag', /\[(TAG)\]/i, { value: 'custom' });
         // parse-torrent-title does not natively support 'transform' or 'uppercase' type on regex handlers,
         // so we must use function handlers to achieve custom behavior:
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         parser.addHandler('val', (input: any) => {
             const title = input.title;
             const result = input.result;
@@ -91,6 +92,7 @@ describe('parsePath', () => {
                 result.val = Number(match[1]) * 2;
             }
         });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         parser.addHandler('upper', (input: any) => {
             const title = input.title;
             const result = input.result;
@@ -103,6 +105,7 @@ describe('parsePath', () => {
         parser.addHandler('bool', /(BOOLEAN)/, { type: 'boolean' });
         parser.addHandler('def', /(DEFAULT)/);
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const result = parser.parse('[TAG] VAL:10 UPPER FLOAT:1.5 BOOLEAN DEFAULT') as any;
         expect(result.tag).toBe('custom');
         expect(result.val).toBe(20);
@@ -128,6 +131,7 @@ describe('parsePath', () => {
         // parser.ts: regex returns a match array without an `index` property (caused by global 'g' flag)
         const parser = new Parser();
         parser.addHandler('global', /match/g);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const globalMatch = parser.parse('match match') as any;
         expect(globalMatch.global).toBe('match');
     });

@@ -1,9 +1,10 @@
-import type { DefaultParserResult, Parser as PTTParser } from 'parse-torrent-title';
+import type { DefaultParserResult } from 'parse-torrent-title';
 
 export interface ParsedInfo extends DefaultParserResult {
     episodeTitle?: string;
     showTitle?: string;
     isExtras?: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
 }
 
